@@ -73,9 +73,7 @@ fun LoginScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.laranja))
-        //.padding(80.dp),
     ) {
-
         Canvas(modifier = Modifier.matchParentSize()) {
             val startY = 0f
 
