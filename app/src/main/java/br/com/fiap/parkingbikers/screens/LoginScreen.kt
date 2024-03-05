@@ -26,7 +26,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.parkingbikers.R
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -94,7 +96,6 @@ fun LoginScreen(navController: NavController) {
                 .align(Alignment.Center),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
-
         )
         {
             Row(
@@ -106,7 +107,7 @@ fun LoginScreen(navController: NavController) {
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.SansSerif,
-                    color = Color.White,
+                    color = colorResource(id = R.color.red),
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Icon(
@@ -120,14 +121,15 @@ fun LoginScreen(navController: NavController) {
                 text = "Gerenciamento Inteligente",
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center,
-                color = colorResource(id = R.color.red)
+                color = colorResource(id = R.color.white),
+                fontWeight = FontWeight.Bold
             )
-
             Text(
                 text = "Estacionamento de Bicicletas",
-                fontSize = 14.sp,
+                fontSize = 17.sp,
                 textAlign = TextAlign.Center,
-                color = colorResource(id = R.color.white)
+                color = colorResource(id = R.color.red),
+                fontWeight = FontWeight.SemiBold
             )
             Spacer(
                 modifier = Modifier.height(30.dp)
@@ -279,6 +281,42 @@ fun LoginScreen(navController: NavController) {
                 textAlign = TextAlign.Left,
                 color = colorResource(id = R.color.white)
             )
+            Spacer(modifier = Modifier.height(56.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.flag_br),
+                    contentDescription = "Português",
+                    modifier = Modifier
+                        .size(
+                            width = 48.dp,
+                            height = 32.dp
+                        )
+                        .padding(end = 8.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.flag_es),
+                    contentDescription = "Espanhol",
+                    modifier = Modifier
+                        .size(
+                            width = 48.dp,
+                            height = 32.dp
+                        )
+                        .padding(end = 8.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.flag_en),
+                    contentDescription = "Inglês",
+                    modifier = Modifier
+                        .size(
+                            width = 48.dp,
+                            height = 32.dp
+                        )
+                        .padding(end = 8.dp)
+                )
+            }
         }
     }
 
