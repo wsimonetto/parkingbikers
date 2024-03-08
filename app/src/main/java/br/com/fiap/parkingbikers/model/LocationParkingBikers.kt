@@ -5,5 +5,8 @@ data class LocationParkingBikers(
     val title: String,
     val latitude: Double,
     val longitude: Double,
-    val iconResourceId: Int
+    val endereco: String,
+    val vagasCapacidade: Int,
+    val iconResourceId: Int,
+
 )
