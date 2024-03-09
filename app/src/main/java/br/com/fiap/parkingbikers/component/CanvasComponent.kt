@@ -1,5 +1,6 @@
 package br.com.fiap.parkingbikers.component
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -13,6 +14,7 @@ import androidx.compose.ui.graphics.drawscope.Fill
 class CanvasComponent(
     private val colors: List<Color>
 ) {
+    @SuppressLint("ComposableNaming")
     @Composable
     fun drawCanvas() {
 
