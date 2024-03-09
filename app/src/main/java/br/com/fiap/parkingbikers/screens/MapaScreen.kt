@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -45,8 +44,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import br.com.fiap.parkingbikers.R
-import br.com.fiap.parkingbikers.component.CanvasComponent
-import br.com.fiap.parkingbikers.component.ColorsScreen
 import br.com.fiap.parkingbikers.model.LocationParkingBikers
 import br.com.fiap.parkingbikers.repository.getAllLocation
 import com.google.android.gms.maps.model.BitmapDescriptor
