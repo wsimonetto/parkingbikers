@@ -6,7 +6,16 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+
     <color name="white">#FFFFFFFF</color>
-    <color name="red">#870707</color>
-    <color name="laranja">#CA3708</color>
+    <color name="blue">#003366</color>
+    <color name="dark_blue">#01203E</color>
+
+    <!-- <color name="screen_three">#FFFFFFFF</color>
+    <color name="screen_one">#870707</color>
+    <color name="screen_two">#CA3708</color> -->
+
+    <color name="screen_three">#EAE0C8</color>
+    <color name="screen_one">#003366</color>
+    <color name="screen_two">#004666</color>
 </resources>

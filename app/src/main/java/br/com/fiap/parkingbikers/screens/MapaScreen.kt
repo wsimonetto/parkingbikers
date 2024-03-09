@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -43,6 +45,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import br.com.fiap.parkingbikers.R
+import br.com.fiap.parkingbikers.component.CanvasComponent
+import br.com.fiap.parkingbikers.component.ColorsScreen
 import br.com.fiap.parkingbikers.model.LocationParkingBikers
 import br.com.fiap.parkingbikers.repository.getAllLocation
 import com.google.android.gms.maps.model.BitmapDescriptor
@@ -73,7 +77,6 @@ fun MapaScreen(context: Context) {
     // Função para buscar a estação com base no nome
     fun searchStation() {
         selectedStation = locais.find { it.title.equals(searchParkingBikers, ignoreCase = true) }
-
     }
 
     Box(
@@ -107,7 +110,7 @@ fun MapaScreen(context: Context) {
                     text = "Digite a estação desejada",
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Bold,
-                    color = colorResource(id = R.color.laranja)
+                    color = colorResource(id = R.color.blue)
                 )
             },
             trailingIcon = {
@@ -115,34 +118,34 @@ fun MapaScreen(context: Context) {
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "buscar",
-                        tint = colorResource(id = R.color.laranja)
+                        tint = colorResource(id = R.color.blue)
                     )
                     colorResource(
-                        id = R.color.laranja
+                        id = R.color.blue
                     )
                 }
             },
             placeholder = {
                 Text(
                     text = "Digite a Estação do Metrô?",
-                    color = colorResource(id = R.color.red)
+                    color = colorResource(id = R.color.blue)
                 )
             },
             maxLines = 1,
-            shape = RoundedCornerShape(16.dp),
+            shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = colorResource(id = R.color.laranja),
-                focusedBorderColor = colorResource(id = R.color.red),
+                unfocusedBorderColor = colorResource(id = R.color.blue),
+                focusedBorderColor = colorResource(id = R.color.blue),
             ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            textStyle = TextStyle(color = colorResource(id = R.color.red)),
+            textStyle = TextStyle(color = colorResource(id = R.color.blue)),
         )
     }
 
     selectedStation?.let { station ->
         Box(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(8.dp)
                 .size(width = 325.dp, height = 150.dp)
         ) {
             Card(
@@ -150,9 +153,11 @@ fun MapaScreen(context: Context) {
                     .padding(10.dp)
                     .fillMaxWidth(),
                 colors = CardDefaults.cardColors(Color.White),
-                elevation = CardDefaults.cardElevation(18.dp)
-
+                elevation = CardDefaults.cardElevation(25.dp),
+                shape = CutCornerShape(bottomEnd = 20.dp, topStart = 20.dp),
+                border = BorderStroke(1.dp, colorResource(id = R.color.blue))
             ) {
+
                 Column(
                     modifier = Modifier.padding(16.dp)
                 ) {
@@ -183,7 +188,7 @@ fun MapaScreen(context: Context) {
                             Icon(
                                 Icons.Default.Close,
                                 contentDescription = "Fechar",
-                                tint = colorResource(id = R.color.red)
+                                tint = colorResource(id = R.color.blue)
                             )
                         }
                     }

@@ -34,15 +34,15 @@ import androidx.navigation.NavController
 import br.com.fiap.parkingbikers.R
 import androidx.compose.animation.core.*
 import androidx.compose.ui.graphics.painter.Painter
+import br.com.fiap.parkingbikers.component.CanvasComponent
+import br.com.fiap.parkingbikers.component.ColorsScreen
 import kotlinx.coroutines.delay
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun OpeningScreen(navController: NavController) {
-    val color1 = colorResource(id = R.color.red)
-    val color2 = colorResource(id = R.color.laranja)
-    val color3 = colorResource(id = R.color.white)
-    val colors = listOf(color1, color2, color3)
+
+    val colors = ColorsScreen()
 
     var visibleScreen by remember {
         mutableStateOf(false)
@@ -58,21 +58,9 @@ fun OpeningScreen(navController: NavController) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colorResource(id = R.color.laranja))
+                .background(colorResource(id = R.color.blue))
         ) {
-            Canvas(modifier = Modifier.matchParentSize()) {
-                val startY = 0f
-                drawRect(
-                    brush = Brush.verticalGradient(
-                        colors = colors.reversed(),
-                        startY = startY,
-                        endY = size.height
-                    ),
-                    topLeft = Offset(0f, startY),
-                    size = Size(size.width, size.height),
-                    style = Fill
-                )
-            }
+            CanvasComponent(colors = colors).drawCanvas()
             ImageAnimationPoint()
             ImageAnimationBike()
         }

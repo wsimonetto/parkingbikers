@@ -7,15 +7,17 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.parkingbikers.screens.LoginScreen
 import br.com.fiap.parkingbikers.screens.MapaScreen
+import br.com.fiap.parkingbikers.screens.MenuScreen
 import br.com.fiap.parkingbikers.screens.OpeningScreen
+import br.com.fiap.parkingbikers.screens.UserRegisterScreen
 import br.com.fiap.parkingbikers.ui.theme.ParkingBikersTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,10 +25,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ParkingBikersTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = colorResource(id = R.color.blue)
                 ) {
                     val navController = rememberNavController()
                     NavHost(
@@ -54,6 +55,12 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(route = "MapaScreen") {
                             MapaScreen(context = this@MainActivity)
+                        }
+                        composable(route = "UserRegisterScreen"){
+                            UserRegisterScreen()
+                        }
+                        composable(route = "MenuScreen"){
+                            MenuScreen(navController)
                         }
                     }
                 }

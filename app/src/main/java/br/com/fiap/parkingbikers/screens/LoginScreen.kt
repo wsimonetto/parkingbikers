@@ -28,9 +28,11 @@ import br.com.fiap.parkingbikers.R
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Icon
@@ -49,15 +51,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import br.com.fiap.parkingbikers.component.CanvasComponent
+import br.com.fiap.parkingbikers.component.ColorsScreen
 
 
 @Composable
 fun LoginScreen(navController: NavController) {
 
-    val color1 = colorResource(id = R.color.red)
-    val color2 = colorResource(id = R.color.laranja)
-    val color3 = colorResource(id = R.color.white)
-    val colors = listOf(color1, color2, color3)
+    val colors = ColorsScreen()
 
     var email by remember {
         mutableStateOf("")
@@ -72,22 +73,8 @@ fun LoginScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(id = R.color.laranja))
     ) {
-        Canvas(modifier = Modifier.matchParentSize()) {
-            val startY = 0f
-
-            drawRect(
-                brush = Brush.verticalGradient(
-                    colors = colors.reversed(),
-                    startY = startY,
-                    endY = size.height
-                ),
-                topLeft = Offset(0f, startY),
-                size = Size(size.width, size.height),
-                style = Fill
-            )
-        }
+        CanvasComponent(colors = colors).drawCanvas()
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -105,7 +92,7 @@ fun LoginScreen(navController: NavController) {
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.SansSerif,
-                    color = colorResource(id = R.color.red),
+                    color = colorResource(id = R.color.blue),
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Icon(
@@ -126,7 +113,7 @@ fun LoginScreen(navController: NavController) {
                 text = "Estacionamento de Bicicletas",
                 fontSize = 17.sp,
                 textAlign = TextAlign.Center,
-                color = colorResource(id = R.color.red),
+                color = colorResource(id = R.color.blue),
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(
@@ -158,10 +145,10 @@ fun LoginScreen(navController: NavController) {
                     )
                 },
                 maxLines = 1,
-                shape = RoundedCornerShape(14.dp),
+                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedBorderColor = colorResource(id = R.color.white),
-                    focusedBorderColor = colorResource(id = R.color.red),
+                    focusedBorderColor = colorResource(id = R.color.dark_blue),
                 ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 textStyle = TextStyle(color = Color.White)
@@ -213,10 +200,10 @@ fun LoginScreen(navController: NavController) {
                     }
                 },
                 maxLines = 1,
-                shape = RoundedCornerShape(14.dp),
+                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedBorderColor = colorResource(id = R.color.white),
-                    focusedBorderColor = colorResource(id = R.color.red),
+                    focusedBorderColor = colorResource(id = R.color.dark_blue),
                 ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 textStyle = TextStyle(color = Color.White),
@@ -225,30 +212,32 @@ fun LoginScreen(navController: NavController) {
                 modifier = Modifier.height(32.dp)
             )
             Button(
-                onClick = { navController.navigate("MapaScreen") },
+                onClick = { navController.navigate("MenuScreen") },
                 colors = ButtonDefaults.buttonColors(Color.White),
                 modifier = Modifier
-                    .width(200.dp)
+                    .width(270.dp),
+                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp)
             ) {
                 Text(
                     text = "Acessar",
                     fontSize = 16.sp,
-                    color = colorResource(id = R.color.laranja)
+                    color = colorResource(id = R.color.blue)
                 )
             }
             Spacer(
                 modifier = Modifier.height(16.dp)
             )
             Button(
-                onClick = { navController.navigate("MapaScreen") },
+                onClick = { navController.navigate("UserRegisterScreen") },
                 colors = ButtonDefaults.buttonColors(Color.White),
                 modifier = Modifier
-                    .width(200.dp)
+                    .width(270.dp),
+                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp)
             ) {
                 Text(
                     text = "Cadastro",
                     fontSize = 16.sp,
-                    color = colorResource(id = R.color.laranja)
+                    color = colorResource(id = R.color.blue)
                 )
             }
             Spacer(
