@@ -39,14 +39,7 @@ fun OpeningScreen(navController: NavController) {
 
     val colors = ColorsScreen()
 
-    var visibleScreen by remember {
-        mutableStateOf(false)
-    }
-    var enterScreen by remember {
-        mutableStateOf(fadeIn())
-    }
-
-    Column(
+   Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
