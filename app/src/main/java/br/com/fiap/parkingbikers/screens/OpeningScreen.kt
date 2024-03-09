@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.fiap.parkingbikers.R
 import androidx.compose.animation.core.*
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.graphics.painter.Painter
 import br.com.fiap.parkingbikers.component.CanvasComponent
 import br.com.fiap.parkingbikers.component.ColorsScreen
@@ -66,7 +67,7 @@ fun OpeningScreen(navController: NavController) {
 @Composable
 fun ImageAnimationPoint() {
 
-    var offsetY by remember { mutableStateOf(0f) }
+    var offsetY by remember { mutableFloatStateOf(0f) }
     var animationFinished by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -112,7 +113,7 @@ fun AnimatedImagePoint(
     contentDescription: String?,
     modifier: Modifier = Modifier,
 ) {
-    val infiniteTransition = rememberInfiniteTransition()
+    val infiniteTransition = rememberInfiniteTransition(label = "")
 
     val yOffset by infiniteTransition.animateFloat(
         initialValue = -500f,
@@ -140,7 +141,7 @@ fun AnimatedImagePoint(
 @Composable
 fun ImageAnimationBike() {
 
-    var offsetX by remember { mutableStateOf(0f) }
+    var offsetX by remember { mutableFloatStateOf(0f) }
     var animationFinished by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -186,7 +187,7 @@ fun AnimatedImageBike(
     contentDescription: String?,
     modifier: Modifier = Modifier,
 ) {
-    val infiniteTransition = rememberInfiniteTransition()
+    val infiniteTransition = rememberInfiniteTransition(label = "")
 
     val xOffset by infiniteTransition.animateFloat(
         initialValue = 500f,
