@@ -6,19 +6,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,13 +33,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.fiap.parkingbikers.R
 import br.com.fiap.parkingbikers.component.CanvasComponent
 import br.com.fiap.parkingbikers.component.ColorsScreen
+import br.com.fiap.parkingbikers.component.InputOutlinedPassword
+import br.com.fiap.parkingbikers.component.InputOutlinedText
 
 @Composable
 fun UserRegisterScreen() {
@@ -74,6 +73,27 @@ fun UserRegisterScreen() {
     }
 
     val colors = ColorsScreen()
+
+    fun setEmail(newEmail: String) {
+        email = newEmail
+    }
+
+    fun setNomeCompleto(newNomeCompleto: String) {
+        nomeCompleto = newNomeCompleto
+    }
+
+    fun setCPF(newCPF: String) {
+        cpf = newCPF
+    }
+
+    fun setPassword(newPassword: String) {
+        password = newPassword
+    }
+
+    fun setPasswordRepeat(newPasswordRepeat: String) {
+        passwordRepeat = newPasswordRepeat
+
+    }
 
     Box(
         modifier = Modifier
@@ -114,25 +134,14 @@ fun UserRegisterScreen() {
                 fontFamily = FontFamily.SansSerif,
                 color = colorResource(id = R.color.white),
             )
-            Spacer(modifier = Modifier.width(20.dp))
-            OutlinedTextField(
+            Spacer(modifier = Modifier.height(20.dp))
+            InputOutlinedText(
                 value = email,
-                onValueChange = { email = it },
-
-                label = {
-                    Text(
-                        text = "E-mail",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = colorResource(id = R.color.white)
-                    )
-                },
-                placeholder = {
-                    Text(
-                        text = "Digite o seu e-mail!",
-                        color = colorResource(id = R.color.white)
-                    )
-                },
+                label = "Email",
+                placeholder = "Digite o seu e-mail!",
+                keyboardType = KeyboardType.Email,
+                maxLines = 1,
+                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
                 trailingIcon = {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_email_24),
@@ -140,69 +149,39 @@ fun UserRegisterScreen() {
                         tint = Color.White
                     )
                 },
-                maxLines = 1,
-                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = colorResource(id = R.color.white),
-                    focusedBorderColor = colorResource(id = R.color.dark_blue),
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                textStyle = TextStyle(color = Color.White)
+                textStyle = TextStyle(color = Color.White),
+                actionValueChange = {
+                    setEmail(it)
+                },
             )
             Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
+            InputOutlinedText(
                 value = nomeCompleto,
-                onValueChange = { nomeCompleto = it },
-
-                label = {
-                    Text(
-                        text = "Nome completo",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = colorResource(id = R.color.white)
-                    )
-                },
-                placeholder = {
-                    Text(
-                        text = "Digite o seu nome completo!",
-                        color = colorResource(id = R.color.white)
-                    )
-                },
+                label = "Nome Completo",
+                placeholder = "Digite o seu nome completo!",
+                keyboardType = KeyboardType.Text,
+                maxLines = 1,
+                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
                 trailingIcon = {
                     Icon(
-                        painter = painterResource(id = R.drawable.baseline_person_24),
+                        painter = painterResource(id = R.drawable.baseline_email_24),
                         contentDescription = "Ícone",
                         tint = Color.White
                     )
                 },
-                maxLines = 1,
-                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = colorResource(id = R.color.white),
-                    focusedBorderColor = colorResource(id = R.color.dark_blue),
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                textStyle = TextStyle(color = Color.White)
+                textStyle = TextStyle(color = Color.White),
+                actionValueChange = {
+                    setNomeCompleto(it)
+                },
             )
             Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
+            InputOutlinedText(
                 value = cpf,
-                onValueChange = { cpf = it },
-
-                label = {
-                    Text(
-                        text = "CPF",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = colorResource(id = R.color.white)
-                    )
-                },
-                placeholder = {
-                    Text(
-                        text = "Digite o seu CPF!",
-                        color = colorResource(id = R.color.white)
-                    )
-                },
+                label = "CPF",
+                placeholder = "Digite o seu CPF!",
+                keyboardType = KeyboardType.Number,
+                maxLines = 1,
+                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
                 trailingIcon = {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_numbers_24),
@@ -210,38 +189,19 @@ fun UserRegisterScreen() {
                         tint = Color.White
                     )
                 },
-                maxLines = 1,
-                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = colorResource(id = R.color.white),
-                    focusedBorderColor = colorResource(id = R.color.dark_blue),
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                textStyle = TextStyle(color = Color.White)
+                textStyle = TextStyle(color = Color.White),
+                actionValueChange = {
+                    setCPF(it)
+                },
             )
             Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
+            InputOutlinedPassword(
                 value = password,
-                onValueChange = { password = it },
-                label = {
-                    Text(
-                        text = "Senha",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = colorResource(id = R.color.white)
-                    )
-                },
-                placeholder = {
-                    Text(
-                        text = "Digite uma senha!",
-                        color = colorResource(id = R.color.white)
-                    )
-                },
-                visualTransformation = if (passwordVisibilityOne) {
-                    VisualTransformation.None
-                } else {
-                    PasswordVisualTransformation()
-                },
+                label = "Senha",
+                placeholder = "Digite uma Senha!",
+                keyboardType = KeyboardType.Text,
+                maxLines = 1,
+                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
                 trailingIcon = {
                     IconButton(
                         onClick = {
@@ -263,38 +223,28 @@ fun UserRegisterScreen() {
                         )
                     }
                 },
+                textStyle = TextStyle(color = Color.White),
+                actionValueChange = {
+                    setPassword(it)
+                },
+                passwordVisibility = passwordVisibilityOne
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text = "(mínimo 8 e máximo 12 caracteres)",
+                fontSize = 12.sp,
+                color = Color.White,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 56.dp)
+            )
+            InputOutlinedPassword(
+                value = passwordRepeat,
+                label = "Senha",
+                placeholder = "Digite uma Senha!",
+                keyboardType = KeyboardType.Text,
                 maxLines = 1,
                 shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = colorResource(id = R.color.white),
-                    focusedBorderColor = colorResource(id = R.color.dark_blue),
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                textStyle = TextStyle(color = Color.White),
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
-                value = passwordRepeat,
-                onValueChange = { passwordRepeat = it },
-                label = {
-                    Text(
-                        text = "Repita Senha",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = colorResource(id = R.color.white)
-                    )
-                },
-                placeholder = {
-                    Text(
-                        text = "Repita a senha!",
-                        color = colorResource(id = R.color.white)
-                    )
-                },
-                visualTransformation = if (passwordVisibilityTwo) {
-                    VisualTransformation.None
-                } else {
-                    PasswordVisualTransformation()
-                },
                 trailingIcon = {
                     IconButton(
                         onClick = {
@@ -316,20 +266,17 @@ fun UserRegisterScreen() {
                         )
                     }
                 },
-                maxLines = 1,
-                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = colorResource(id = R.color.white),
-                    focusedBorderColor = colorResource(id = R.color.dark_blue),
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 textStyle = TextStyle(color = Color.White),
+                actionValueChange = {
+                    setPasswordRepeat(it)
+                },
+                passwordVisibility = passwordVisibilityTwo
             )
-            Spacer(
-                modifier = Modifier.height(32.dp)
-            )
+            Spacer(modifier = Modifier.height(32.dp))
             Button(
-                onClick = {  },
+                onClick = {
+                    // posteriormente
+                },
                 colors = ButtonDefaults.buttonColors(Color.White),
                 modifier = Modifier
                     .width(270.dp),
@@ -344,5 +291,3 @@ fun UserRegisterScreen() {
         }
     }
 }
-
-

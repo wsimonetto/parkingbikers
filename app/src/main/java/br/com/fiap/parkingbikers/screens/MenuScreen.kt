@@ -70,7 +70,7 @@ fun MenuScreen(navController: NavController) {
         MenuItemCard(
             icon = ImageVector.vectorResource(id = R.drawable.baseline_map_24),
             title = "Mapa",
-            description = "Acesso ao mapa, pesquisa das Estações do Metrô",
+            description = "Mapa, pesquisa Estações do Metrô",
             onClick = { navController.navigate("MapaScreen") }
         )
         MenuItemCard(
@@ -92,11 +92,6 @@ fun MenuScreen(navController: NavController) {
             onClick = { navController.navigate("perfil") }
         )
         Spacer(modifier = Modifier.height(45.dp))
-        Text(
-            text = "Clique nos ícones",
-            fontSize = 12.sp,
-            color = Color.White
-        )
     }
 }
 
@@ -153,5 +148,3 @@ fun MenuItemCard(
         }
     }
 }
-
-

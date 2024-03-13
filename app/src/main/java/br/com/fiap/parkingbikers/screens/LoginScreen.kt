@@ -6,11 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,11 +37,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import br.com.fiap.parkingbikers.component.CanvasComponent
 import br.com.fiap.parkingbikers.component.ColorsScreen
+import br.com.fiap.parkingbikers.component.InputOutlinedPassword
+import br.com.fiap.parkingbikers.component.InputOutlinedText
 
 
 @Composable
@@ -55,11 +52,21 @@ fun LoginScreen(navController: NavController) {
     var email by remember {
         mutableStateOf("")
     }
+
     var password by remember {
         mutableStateOf("")
     }
+
     var passwordVisibility by remember {
         mutableStateOf(false)
+    }
+
+    fun setEmail(newEmail: String) {
+        email = newEmail
+    }
+
+    fun setPassword(newPassword: String) {
+        password = newPassword
     }
 
     Box(
@@ -111,24 +118,13 @@ fun LoginScreen(navController: NavController) {
             Spacer(
                 modifier = Modifier.height(30.dp)
             )
-            OutlinedTextField(
+            InputOutlinedText(
                 value = email,
-                onValueChange = { email = it },
-
-                label = {
-                    Text(
-                        text = "Usuário/e-mail",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = colorResource(id = R.color.white)
-                    )
-                },
-                placeholder = {
-                    Text(
-                        text = "Digite o seu e-mail!",
-                        color = colorResource(id = R.color.white)
-                    )
-                },
+                label = "Email",
+                placeholder = "Digite o seu e-mail!",
+                keyboardType = KeyboardType.Email,
+                maxLines = 1,
+                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
                 trailingIcon = {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_email_24),
@@ -136,40 +132,19 @@ fun LoginScreen(navController: NavController) {
                         tint = Color.White
                     )
                 },
+                textStyle = TextStyle(color = Color.White),
+                actionValueChange = {
+                    setEmail(it)
+                },
+            )
+            Spacer(modifier = Modifier.height(15.dp))
+            InputOutlinedPassword(
+                value = password,
+                label = "Senha",
+                placeholder = "Digite a sua Senha!",
+                keyboardType = KeyboardType.Text,
                 maxLines = 1,
                 shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = colorResource(id = R.color.white),
-                    focusedBorderColor = colorResource(id = R.color.dark_blue),
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                textStyle = TextStyle(color = Color.White)
-            )
-            Spacer(
-                modifier = Modifier.height(15.dp)
-            )
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = {
-                    Text(
-                        text = "Senha",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = colorResource(id = R.color.white)
-                    )
-                },
-                placeholder = {
-                    Text(
-                        text = "Digite a sua senha!",
-                        color = colorResource(id = R.color.white)
-                    )
-                },
-                visualTransformation = if (passwordVisibility) {
-                    VisualTransformation.None
-                } else {
-                    PasswordVisualTransformation()
-                },
                 trailingIcon = {
                     IconButton(
                         onClick = {
@@ -191,14 +166,11 @@ fun LoginScreen(navController: NavController) {
                         )
                     }
                 },
-                maxLines = 1,
-                shape = CutCornerShape(bottomEnd = 15.dp, topStart = 15.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = colorResource(id = R.color.white),
-                    focusedBorderColor = colorResource(id = R.color.dark_blue),
-                ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 textStyle = TextStyle(color = Color.White),
+                actionValueChange = {
+                    setPassword(it)
+                },
+                passwordVisibility = passwordVisibility
             )
             Spacer(
                 modifier = Modifier.height(32.dp)
@@ -298,6 +270,4 @@ fun LoginScreen(navController: NavController) {
             }
         }
     }
-
 } // FIM
-
