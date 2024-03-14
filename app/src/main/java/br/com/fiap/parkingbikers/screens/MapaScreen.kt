@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -54,6 +55,7 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import java.text.Normalizer
 
 @Composable
 fun MapaScreen(context: Context) {
@@ -71,9 +73,31 @@ fun MapaScreen(context: Context) {
         mutableStateOf<LocationParkingBikers?>(null)
     }
 
-    // Função para buscar a estação com base no nome
-    fun searchStation() {
+    // buscar a estação com base no nome
+    /*fun searchStation() {
         selectedStation = locais.find { it.title.equals(searchParkingBikers, ignoreCase = true) }
+    } */
+
+    // remover acentos de uma string
+    fun String.removeAccents(): String {
+        return Normalizer.normalize(this, Normalizer.Form.NFD)
+            .replace("\\p{InCombiningDiacriticalMarks}+".toRegex(), "")
+    }
+
+    // buscar a estação com base no nome
+    fun searchStation() {
+        val searchTextNormalized = searchParkingBikers.removeAccents() // Normalizar texto de busca
+        selectedStation = locais.find {
+            it.title.removeAccents().equals(searchTextNormalized, ignoreCase = true)
+        }
+        //selectedStation = locais.find { it.title.equals(searchParkingBikers, ignoreCase = true) }
+        selectedStation?.let { station ->
+            // Atualizar a posição da câmera para a estação selecionada
+            cameraPositionState.position = CameraPosition.Builder()
+                .target(LatLng(station.latitude, station.longitude))
+                .zoom(16f) // Zoom opcional, pode ajustar conforme necessário
+                .build()
+        }
     }
 
     Box(
@@ -94,7 +118,7 @@ fun MapaScreen(context: Context) {
             }
         }
 
-        // sobre o mapa
+        // ficar sobre o mapa
         OutlinedTextField(
             value = searchParkingBikers,
             onValueChange = { searchParkingBikers = it },
@@ -140,6 +164,7 @@ fun MapaScreen(context: Context) {
     }
 
     selectedStation?.let { station ->
+
         Box(
             modifier = Modifier
                 .padding(8.dp)
@@ -159,33 +184,61 @@ fun MapaScreen(context: Context) {
                     modifier = Modifier.padding(16.dp)
                 ) {
                     Text(
-                        text = station.title,
+                        text = "Parking Bikers - ${station.title}",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black
+                        color = colorResource(id = R.color.dark_blue)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Capacidade: ${station.vagasCapacidade} vagas",
                         fontSize = 14.sp,
-                        color = Color.Gray
+                        color = colorResource(id = R.color.blue_light)
+                    )
+                    Text(
+                        text = "Disponíveis: ${station.vagasDisponiveis} vagas",
+                        fontSize = 14.sp,
+                        color = colorResource(id = R.color.blue_light)
+                    )
+                    Text(
+                        text = "*** Vagas podem alterar até sua chegada ***",
+                        fontSize = 12.sp,
+                        color = colorResource(id = R.color.red)
                     )
                     Text(
                         text = "Endereço: ${station.endereco}",
                         fontSize = 14.sp,
-                        color = Color.Gray
+                        color = colorResource(id = R.color.blue_light)
                     )
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center
                     ) {
                         IconButton(
-                            onClick = { selectedStation = null }
+                            onClick = {
+
+                            }
+                        ) {
+                            Icon(
+                                Icons.Default.Favorite,
+                                contentDescription = "Favorito",
+                                tint = colorResource(id = R.color.green)
+                            )
+                        }
+                        IconButton(
+                            onClick = {
+                                searchParkingBikers = ""
+                                selectedStation = null
+                                cameraPositionState.position = CameraPosition.Builder()
+                                    .target(centralParkingsBikes)
+                                    .zoom(12f)
+                                    .build()
+                            }
                         ) {
                             Icon(
                                 Icons.Default.Close,
                                 contentDescription = "Fechar",
-                                tint = colorResource(id = R.color.blue)
+                                tint = colorResource(id = R.color.red)
                             )
                         }
                     }
@@ -194,7 +247,6 @@ fun MapaScreen(context: Context) {
         }
     }
 } // FIM
-
 
 @Composable
 fun MapaMarker(
@@ -232,4 +284,7 @@ fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescri
     drawable.draw(canvas)
     return BitmapDescriptorFactory.fromBitmap(bm)
 }
+
+
+
 

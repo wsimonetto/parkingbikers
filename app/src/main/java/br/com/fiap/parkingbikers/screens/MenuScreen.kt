@@ -66,7 +66,14 @@ fun MenuScreen(navController: NavController) {
                 tint = Color.White
             )
         }
-        Spacer(modifier = Modifier.height(30.dp))
+        Text(
+            text = "Menu",
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily.SansSerif,
+            color = colorResource(id = R.color.white),
+        )
+        Spacer(modifier = Modifier.height(18.dp))
         MenuItemCard(
             icon = ImageVector.vectorResource(id = R.drawable.baseline_map_24),
             title = "Mapa",

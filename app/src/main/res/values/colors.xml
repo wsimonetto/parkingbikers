@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="purple_500">#003366</color>
+    <color name="purple_700">#004666</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
 
+    <!-- Letters -->
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#003366</color>
+    <color name="blue_light">#004666</color>
     <color name="dark_blue">#01203E</color>
+    <color name="red">#7E072B</color>
+    <color name="green">#07970C</color>
 
-    <!-- <color name="screen_three">#FFFFFFFF</color>
-    <color name="screen_one">#870707</color>
-    <color name="screen_two">#CA3708</color> -->
 
+    <!-- Canvas -->
     <color name="screen_three">#EAE0C8</color>
     <color name="screen_one">#003366</color>
     <color name="screen_two">#004666</color>
+
 </resources>
